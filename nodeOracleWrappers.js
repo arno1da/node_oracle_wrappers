@@ -36,15 +36,15 @@ let executeQuery = function(connection, params, query) {
 };
 
 
-let commitConnection = function(connection, results) {
+let commitConnection = function(resultsAndConnection) {
 	return new Promise((resolve , reject)=> {
-		connection.commit(function(err) {
+		resultsAndConnection.connection.commit(function(err) {
 			if (err) {
 				reject(err);
 			}
 
-			if (results) {
-				resolve(results)
+			if (resultsAndConnection) {
+				resolve(resultsAndConnection)
 			} else {
 				resolve();
 			}
@@ -70,7 +70,6 @@ let releaseConnection = function(connection, results) {
 
 let getData = function(credentials, query, params) {
 	return new Promise((resolve , reject) => {
-
 		getConnection(credentials)
 		.then((connection)=> {
 			if (params) {
@@ -86,12 +85,34 @@ let getData = function(credentials, query, params) {
 			resolve(results);
 		})
 		.catch((err)=> {
-			console.error("Error during get data " + err);
 			reject(err);
 		})
-
 	});
+};
 
+let executeStatement = function(credentials, params, statement) {
+	return new Promise((resolve , reject) => {
+		getConnection(credentials)
+		.then((connection) => {
+			if (params) {
+				return executeQuery(connection, params, statement);
+			} else {
+				return executeQuery(connection, {}, statement);
+			}
+		})
+		.then((queryResults)=> {
+			return commitConnection(queryResults)
+		})
+		.then((commitResults)=> {
+			return releaseConnection(commitResults.connection, commitResults.results)
+		})
+		.then((results)=> {
+			resolve(results);
+		})
+		.catch((err) => {
+			reject(err);
+		})
+	})
 }
 
 
@@ -100,5 +121,6 @@ module.exports.nodeOracleWrappers = {
 	getData: getData,
 	releaseConnection: releaseConnection,
 	commitConnection: commitConnection,
-	getConnection: getConnection
+	getConnection: getConnection,
+	executeStatement: executeStatement
 }
