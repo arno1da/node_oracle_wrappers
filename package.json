@@ -14,7 +14,7 @@
     "node",
     "oracle",
     "javascript",
-    "wrappers"
+    "promise"
   ],
   "author": "Arnold Agus",
   "license": "ISC",
