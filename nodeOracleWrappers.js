@@ -16,26 +16,22 @@ let getConnection = function(connectionDetails) {
 
 let executeQuery = function(connection, params, query) {
 	return new Promise((resolve , reject)=> {
-		try {
-			connection.execute(
-				query,
-				params,
-				{outFormat: oracledb.OBJECT},
-				(err, results) => {
-					if (err) {
-						console.error("Error during query execution.");
-						reject(err);
-					} else {
-						resolve({
-							connection: connection,
-							results: results
-						})
-					}
+		connection.execute(
+			query,
+			params,
+			{outFormat: oracledb.OBJECT},
+			(err, results) => {
+				if (err) {
+					console.error("Error during query execution.");
+					reject(err);
+				} else {
+					resolve({
+						connection: connection,
+						results: results
+					})
 				}
-				)
-		} catch(err) {
-			reject(err);
-		}
+			}
+			)
 	});
 };
 
