@@ -1,0 +1,1 @@
+Simple wrappers to the node oracle library. All modules will chain together the promises.
