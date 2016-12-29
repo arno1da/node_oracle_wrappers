@@ -90,7 +90,7 @@ let getData = function(credentials, query, params) {
 	});
 };
 
-let executeStatement = function(credentials, params, statement) {
+let executeStatement = function(credentials, statement, params) {
 	return new Promise((resolve , reject) => {
 		getConnection(credentials)
 		.then((connection) => {
