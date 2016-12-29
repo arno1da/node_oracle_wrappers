@@ -56,9 +56,9 @@ oracleWrappers.getData(credentials, query, bindParams)
 #### Methods
 
 ```
-# Will connect, query and release
+# Will connect, query and release. Note params are optional.
 oracleWrappers.getData(credentials, query, params)
 
-# Will connect, execute, commit and release
+# Will connect, execute, commit and release. Note params are optional.
 oracleWrappers.executeStatement(credentials, statement, params)
 ```
