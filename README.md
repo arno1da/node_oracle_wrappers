@@ -34,6 +34,11 @@ oracleWrappers.getData(credentials, query)
 	let rowsInObjectFormatt = results.rows;
 	let metaData = results.metaData;
 })
+//Will propagate all errors during either phase of connection / etc
+.catch((errors)=> {
+	console.error("Odear!");
+	console.log(errors);
+})
 
 /*
 Query with bind variables
@@ -50,6 +55,10 @@ oracleWrappers.getData(credentials, query, bindParams)
 	let rowsInObjectFormatt = results.rows;
 	let metaData = results.metaData;
 	console.log(rowsInObjectFormatt);
+})
+.catch((errors)=> {
+	console.error("Odear!");
+	console.log(errors);
 })
 
 ```
