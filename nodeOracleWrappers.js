@@ -117,7 +117,7 @@ let executeStatement = function(credentials, params, statement) {
 
 
 
-module.exports.nodeOracleWrappers = {
+module.exports = {
 	getData: getData,
 	releaseConnection: releaseConnection,
 	commitConnection: commitConnection,
