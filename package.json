@@ -1,6 +1,6 @@
 {
   "name": "node_oracle_wrappers",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "promise wrappers to the node oracle library",
   "main": "nodeOracleWrappers.js",
   "scripts": {
