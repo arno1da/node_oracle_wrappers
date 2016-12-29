@@ -19,7 +19,7 @@ let executeQuery = function(connection, params, query) {
 		connection.execute(
 			query,
 			params,
-			{outFormat: oracledb.OBJECT},
+			{outFormat: Oracledb.OBJECT},
 			(err, results) => {
 				if (err) {
 					console.error("Error during query execution.");
